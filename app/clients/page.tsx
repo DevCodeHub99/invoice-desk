@@ -116,11 +116,11 @@ export default function ClientsPage() {
           />
         </Card>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Add New Card */}
           <button
             onClick={() => openModal()}
-            className="flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-xl hover:border-primary hover:bg-primary/5 transition-all min-h-[180px] cursor-pointer group"
+            className="flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-xl hover:border-primary hover:bg-primary/5 transition-all min-h-[140px] sm:min-h-[180px] cursor-pointer group"
           >
             <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors">
               <Plus className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
@@ -200,8 +200,8 @@ export default function ClientsPage() {
         title={editingClient ? 'Edit Client' : 'Add Client'}
         size="lg"
       >
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Input
               label="Company Name"
               value={formData.companyName}
@@ -217,7 +217,7 @@ export default function ClientsPage() {
               placeholder="John Smith"
             />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Input
               label="Email"
               type="email"
@@ -229,7 +229,7 @@ export default function ClientsPage() {
               label="Phone"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              placeholder="+1 (555) 000-0000"
+              placeholder="+91 98765 43210"
             />
           </div>
           <Input
@@ -238,33 +238,33 @@ export default function ClientsPage() {
             onChange={(e) => setFormData({ ...formData, address: e.target.value })}
             placeholder="123 Business Street"
           />
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
             <Input
               label="City"
               value={formData.city}
               onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-              placeholder="New York"
+              placeholder="Mumbai"
             />
             <Input
               label="State"
               value={formData.state}
               onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-              placeholder="NY"
+              placeholder="MH"
             />
             <Input
-              label="ZIP Code"
+              label="PIN Code"
               value={formData.zipCode}
               onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })}
-              placeholder="10001"
+              placeholder="400001"
             />
             <Input
               label="Country"
               value={formData.country}
               onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-              placeholder="USA"
+              placeholder="India"
             />
           </div>
-          <div className="flex justify-end gap-3 pt-4">
+          <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4">
             <Button type="button" variant="secondary" onClick={closeModal}>
               Cancel
             </Button>

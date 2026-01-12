@@ -110,11 +110,11 @@ export default function ProductsPage() {
           />
         </Card>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Add New Card */}
           <button
             onClick={() => openModal()}
-            className="flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-xl hover:border-primary hover:bg-primary/5 transition-all min-h-[160px] cursor-pointer group"
+            className="flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-xl hover:border-primary hover:bg-primary/5 transition-all min-h-[120px] sm:min-h-[160px] cursor-pointer group"
           >
             <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors">
               <Plus className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
@@ -184,7 +184,7 @@ export default function ProductsPage() {
         onClose={closeModal}
         title={editingProduct ? 'Edit Product' : 'Add Product'}
       >
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
           <Input
             label="Product Name"
             value={formData.name}
@@ -199,9 +199,9 @@ export default function ProductsPage() {
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             placeholder="Brief description (optional)"
           />
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Input
-              label="Price"
+              label="Price (₹)"
               type="number"
               step="0.01"
               min="0"
@@ -218,16 +218,16 @@ export default function ProductsPage() {
               max="100"
               value={formData.taxRate}
               onChange={(e) => setFormData({ ...formData, taxRate: e.target.value })}
-              placeholder="0"
+              placeholder="18"
             />
             <Input
               label="Unit"
               value={formData.unit}
               onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
-              placeholder="unit, hour, etc."
+              placeholder="hour, project, etc."
             />
           </div>
-          <div className="flex justify-end gap-3 pt-4">
+          <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4">
             <Button type="button" variant="secondary" onClick={closeModal}>
               Cancel
             </Button>

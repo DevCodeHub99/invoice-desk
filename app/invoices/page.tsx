@@ -97,26 +97,26 @@ export default function InvoicesPage() {
                     <Link
                       key={invoice.id}
                       href={`/invoices/${invoice.id}`}
-                      className="flex items-center justify-between px-6 py-4 hover:bg-muted/50 transition-colors cursor-pointer group"
+                      className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 hover:bg-muted/50 transition-colors cursor-pointer group gap-3"
                     >
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
+                        <div className="hidden sm:flex w-10 h-10 rounded-lg bg-primary/10 items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
                           <FileText className="w-5 h-5 text-primary" />
                         </div>
-                        <div>
-                          <p className="font-medium text-foreground group-hover:text-primary transition-colors">
+                        <div className="min-w-0">
+                          <p className="font-medium text-foreground group-hover:text-primary transition-colors text-sm sm:text-base truncate">
                             {invoice.invoiceNumber}
                           </p>
-                          <p className="text-sm text-muted-foreground">{invoice.clientName}</p>
+                          <p className="text-xs sm:text-sm text-muted-foreground truncate">{invoice.clientName}</p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
                         <div className="text-right">
-                          <p className="font-medium text-foreground">{formatCurrency(invoice.total)}</p>
-                          <p className="text-xs text-muted-foreground">{formatDate(invoice.createdAt)}</p>
+                          <p className="font-medium text-foreground text-sm sm:text-base">{formatCurrency(invoice.total)}</p>
+                          <p className="text-xs text-muted-foreground hidden sm:block">{formatDate(invoice.createdAt)}</p>
                         </div>
                         {getStatusBadge(invoice.status)}
-                        <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                        <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors hidden sm:block" />
                       </div>
                     </Link>
                   ))}
@@ -142,25 +142,25 @@ export default function InvoicesPage() {
                   {archivedInvoices.map((invoice) => (
                     <div
                       key={invoice.id}
-                      className="flex items-center justify-between px-6 py-4 opacity-60"
+                      className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 opacity-60 gap-3"
                       title="Detailed view available for recent invoices only"
                     >
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center">
+                      <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
+                        <div className="hidden sm:flex w-10 h-10 rounded-lg bg-muted items-center justify-center flex-shrink-0">
                           <FileText className="w-5 h-5 text-muted-foreground" />
                         </div>
-                        <div>
-                          <p className="font-medium text-muted-foreground">{invoice.invoiceNumber}</p>
-                          <p className="text-sm text-muted-foreground/70">{invoice.clientName}</p>
+                        <div className="min-w-0">
+                          <p className="font-medium text-muted-foreground text-sm sm:text-base truncate">{invoice.invoiceNumber}</p>
+                          <p className="text-xs sm:text-sm text-muted-foreground/70 truncate">{invoice.clientName}</p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
                         <div className="text-right">
-                          <p className="font-medium text-muted-foreground">{formatCurrency(invoice.total)}</p>
-                          <p className="text-xs text-muted-foreground/70">{formatDate(invoice.createdAt)}</p>
+                          <p className="font-medium text-muted-foreground text-sm sm:text-base">{formatCurrency(invoice.total)}</p>
+                          <p className="text-xs text-muted-foreground/70 hidden sm:block">{formatDate(invoice.createdAt)}</p>
                         </div>
                         {getStatusBadge(invoice.status)}
-                        <Lock className="w-4 h-4 text-muted-foreground/40" />
+                        <Lock className="w-4 h-4 text-muted-foreground/40 hidden sm:block" />
                       </div>
                     </div>
                   ))}

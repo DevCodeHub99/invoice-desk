@@ -50,7 +50,7 @@ export default function SettingsPage() {
                     value={companyInfo.name}
                     onChange={(e) => setCompanyInfo({ ...companyInfo, name: e.target.value })}
                   />
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <Input
                       label="Email"
                       type="email"
@@ -68,7 +68,7 @@ export default function SettingsPage() {
                     value={companyInfo.address}
                     onChange={(e) => setCompanyInfo({ ...companyInfo, address: e.target.value })}
                   />
-                  <div className="grid grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     <Input
                       label="City"
                       value={companyInfo.city}

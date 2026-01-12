@@ -129,9 +129,9 @@ export default function NewInvoicePage() {
       </div>
 
       <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Main Content */}
-          <div className="col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6 order-2 lg:order-1">
             {/* Client Selection */}
             <Card>
               <CardContent>
@@ -168,7 +168,7 @@ export default function NewInvoicePage() {
             {/* Line Items */}
             <Card>
               <CardContent>
-                <h3 className="font-medium text-foreground mb-4">Invoice Items</h3>
+                <h3 className="font-medium text-foreground mb-4 text-sm sm:text-base">Invoice Items</h3>
                 <div className="space-y-3">
                   {lineItems.map((item, index) => {
                     const product = products.find((p) => p.id === item.productId);
@@ -177,44 +177,46 @@ export default function NewInvoicePage() {
                       : 0;
 
                     return (
-                      <div key={item.id} className="flex items-end gap-3">
+                      <div key={item.id} className="flex flex-col sm:flex-row sm:items-end gap-2 sm:gap-3 p-3 sm:p-0 bg-muted/30 sm:bg-transparent rounded-lg sm:rounded-none">
                         <div className="flex-1">
                           <Select
-                            label={index === 0 ? 'Product' : undefined}
+                            label={index === 0 || window.innerWidth < 640 ? 'Product' : undefined}
                             options={productOptions}
                             value={item.productId}
                             onChange={(e) => updateLineItem(item.id, 'productId', e.target.value)}
                           />
                         </div>
-                        <div className="w-24">
-                          <Input
-                            label={index === 0 ? 'Qty' : undefined}
-                            type="number"
-                            min="1"
-                            value={item.quantity}
-                            onChange={(e) => updateLineItem(item.id, 'quantity', parseInt(e.target.value) || 1)}
-                          />
+                        <div className="flex items-end gap-2 sm:gap-3">
+                          <div className="w-20 sm:w-24">
+                            <Input
+                              label="Qty"
+                              type="number"
+                              min="1"
+                              value={item.quantity}
+                              onChange={(e) => updateLineItem(item.id, 'quantity', parseInt(e.target.value) || 1)}
+                            />
+                          </div>
+                          <div className="flex-1 sm:w-28 text-right">
+                            <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1.5">Total</p>
+                            <p className="h-10 flex items-center justify-end font-medium text-foreground text-sm sm:text-base">
+                              {formatCurrency(itemTotal)}
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => removeLineItem(item.id)}
+                            className="h-10 p-2 rounded-lg hover:bg-danger/10 transition-colors disabled:opacity-30"
+                            disabled={lineItems.length === 1}
+                            aria-label="Remove item"
+                          >
+                            <Trash2 className="w-4 h-4 text-danger" />
+                          </button>
                         </div>
-                        <div className="w-28 text-right">
-                          {index === 0 && <p className="text-sm font-medium text-muted-foreground mb-1.5">Total</p>}
-                          <p className="h-10 flex items-center justify-end font-medium text-foreground">
-                            {formatCurrency(itemTotal)}
-                          </p>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => removeLineItem(item.id)}
-                          className="h-10 p-2 rounded-lg hover:bg-danger/10 transition-colors disabled:opacity-30"
-                          disabled={lineItems.length === 1}
-                          aria-label="Remove item"
-                        >
-                          <Trash2 className="w-4 h-4 text-danger" />
-                        </button>
                       </div>
                     );
                   })}
                 </div>
-                <Button type="button" variant="secondary" onClick={addLineItem} className="mt-4">
+                <Button type="button" variant="secondary" onClick={addLineItem} className="mt-4 w-full sm:w-auto">
                   <Plus className="w-4 h-4 mr-2" />
                   Add Item
                 </Button>
@@ -244,8 +246,8 @@ export default function NewInvoicePage() {
           </div>
 
           {/* Sidebar - Summary */}
-          <div className="space-y-6">
-            <Card className="sticky top-8">
+          <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
+            <Card className="lg:sticky lg:top-8">
               <CardContent>
                 <h3 className="font-medium text-foreground mb-4">Invoice Summary</h3>
                 <div className="space-y-3">
@@ -277,7 +279,7 @@ export default function NewInvoicePage() {
                   value={dueInDays}
                   onChange={(e) => setDueInDays(e.target.value)}
                 />
-                <Button type="submit" className="w-full" disabled={!canSubmit}>
+                <Button type="submit" className="w-full mt-4" disabled={!canSubmit}>
                   <FileText className="w-4 h-4 mr-2" />
                   Create Invoice
                 </Button>
